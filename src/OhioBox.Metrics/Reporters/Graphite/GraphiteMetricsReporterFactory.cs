@@ -13,6 +13,12 @@ namespace OhioBox.Metrics.Reporters.Graphite
 			_graphiteSwitch = graphiteSwitch;
 		}
 
+		public GraphiteMetricsReporterFactory(string ipAddress, string prefix = "" , bool reportMachineName = false, IGraphiteSwitch graphiteSwitch = null)
+		{
+			_configuration = new GraphiteConfiguration(ipAddress,reportMachineName,prefix);
+			_graphiteSwitch = graphiteSwitch;
+		}
+
 		public Action<DataPoint> CreateReporter()
 		{
 			return new GraphiteReporter(_configuration, _graphiteSwitch).Report;
